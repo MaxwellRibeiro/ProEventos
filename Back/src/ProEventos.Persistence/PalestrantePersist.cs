@@ -7,10 +7,10 @@ using ProEventos.Persistence.Contratos;
 
 namespace ProEventos.Persistence
 {
-    public class PalestrantesPersist : IPalestrantePersist
+    public class PalestrantePersist : IPalestrantePersist
     {
         private readonly ProEventosContext _context;
-        public PalestrantesPersist(ProEventosContext context)
+        public PalestrantePersist(ProEventosContext context)
         {
             this._context = context;
         }
@@ -27,7 +27,7 @@ namespace ProEventos.Persistence
                     .ThenInclude(pe => pe.Evento);
             }
 
-            query = query.OrderBy(p => p.Id);
+            query = query.AsNoTracking().OrderBy(p => p.Id);
 
             return await query.ToArrayAsync();
         }
@@ -43,7 +43,7 @@ namespace ProEventos.Persistence
                     .ThenInclude(pe => pe.Evento);
             }
 
-            query = query.OrderBy(e => e.Id)
+            query = query.AsNoTracking().OrderBy(e => e.Id)
                 .Where(p => p.Nome.ToLower().Contains(nome.ToLower()));
 
             return await query.ToArrayAsync();
@@ -61,7 +61,7 @@ namespace ProEventos.Persistence
                     .ThenInclude(pe => pe.Evento);
             }
 
-            query = query.OrderBy(e => e.Id)
+            query = query.AsNoTracking().OrderBy(e => e.Id)
                 .Where(p => p.Id == palestranteId);
 
             return await query.FirstOrDefaultAsync();
