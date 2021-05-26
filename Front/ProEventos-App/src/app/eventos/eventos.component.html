@@ -1,9 +1,8 @@
 <h2>Eventos</h2>
 <hr>
-
 <div class="form-inline">
   <div class="form-group mb-2">
-    <label class="mr-2">Filtro</label>
+    <label class="mr-2">Filtro: </label>
     <input
     type="text"
     class="form-control mr-2"
@@ -12,6 +11,7 @@
     >
   </div>
 </div>
+<!-- <h3>Filtro: {{filtroLista}}</h3> -->
 <table class="table table-striped">
   <thead class="thead-dark">
     <tr>
@@ -32,26 +32,26 @@
     </tr>
   </thead>
   <tbody *ngIf="eventos && eventos.length">
-    <tr *ngFor="let evento of eventosFiltrador">
+    <tr *ngFor="let evento of eventosFiltrados">
       <td>
         <img [collapse]="!exibirImagem"
-             [isAnimated] = "true"
+             [isAnimated]="true"
           src="/assets/{{evento.imagemURL}}"
           [style.width.px]="larguraImagem"
-          [style.margin.px]="MargemImagem"
-          >
+          [style.margin.px]="margemImagem"
+        >
       </td>
       <td>{{evento.id}}</td>
       <td>{{evento.tema}}</td>
       <td>{{evento.local}}</td>
       <td>{{evento.dataEvento | DateFormatPipe}}</td>
       <td>{{evento.qtdPessoas}}</td>
-      <td>{{evento.lotes[0].nome}}</td>
+      <td>{{evento.lotes[0].nome | uppercase}}</td>
       <td>
         <button type="button" class="btn btn-primary btn-sm mr-2" tooltip="Editar">
           <i class="fa fa-edit"></i>
         </button>
-        <button type="button" class="btn btn-danger btn-sm mr-2" tooltip="Excluir" (click)="openModal(template)">
+        <button type="button" class="btn btn-danger btn-sm" tooltip="Excluir" (click)="openModal(template)">
           <i class="fa fa-trash"></i>
         </button>
       </td>
@@ -66,10 +66,12 @@
   </tfoot>
 </table>
 
+<!-- {{eventos | json}} -->
+
 <ng-template #template>
   <div class="modal-body text-center">
     <p>Tem certeza que quer deletar este Evento?</p>
-    <button type="button" class="btn btn-default" (click)="confirm()" >Sim</button>
-    <button type="button" class="btn btn-primary" (click)="decline()" >Não</button>
+    <button type="button" class="btn btn-default" (click)="confirm()">Sim</button>
+    <button type="button" class="btn btn-primary" (click)="decline()">Não</button>
   </div>
 </ng-template>

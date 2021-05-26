@@ -14,9 +14,9 @@ import { EventoService } from '../services/evento.service';
 export class EventosComponent implements OnInit {
   modalRef: BsModalRef;
   public eventos: Evento[] = [];
-  public eventosFiltrador: Evento[] = [];
+  public eventosFiltrados: Evento[] = [];
   public larguraImagem = 150;
-  public MargemImagem = 2;
+  public margemImagem = 2;
   public exibirImagem = true;
   private filtroListrado = '';
 
@@ -31,7 +31,7 @@ export class EventosComponent implements OnInit {
 
   public filtrarEventos(filtrarPor: string): Evento[] {
     filtrarPor = filtrarPor.toLocaleLowerCase();
-    return this.eventosFiltrador.filter((evento: { tema: string; local: string; }) =>
+    return this.eventosFiltrados.filter((evento: { tema: string; local: string; }) =>
                                                   evento.tema.toLocaleLowerCase().indexOf(filtrarPor) !== -1 ||
                                                   evento.local.toLocaleLowerCase().indexOf(filtrarPor) !== -1 );
   }
@@ -56,7 +56,7 @@ export class EventosComponent implements OnInit {
     this.eventoService.getEventos().subscribe({
       next: (eventos: Evento[]) => {
         this.eventos = eventos;
-        this.eventosFiltrador = this.eventos;
+        this.eventosFiltrados = this.eventos;
       },
       error: () => {
         this.spinner.hide();
