@@ -25,6 +25,7 @@ import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { PerfilComponent } from './components/perfil/perfil.component';
 import { EventoService } from './services/evento.service';
 import { EventosComponent } from './components/eventos/eventos.component';
+import { TituloComponent } from './shared/titulo/titulo.component';
 
 @NgModule({
   declarations: [
@@ -35,6 +36,7 @@ import { EventosComponent } from './components/eventos/eventos.component';
     DashboardComponent,
     PerfilComponent,
     NavComponent,
+    TituloComponent,
     DateTimeFormatPipe
    ],
   imports: [
