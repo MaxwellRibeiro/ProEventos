@@ -7,7 +7,6 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { NavComponent } from './nav/nav.component';
 
 import { ToastrModule } from 'ngx-toastr';
 import { NgxSpinnerModule } from 'ngx-spinner';
@@ -26,6 +25,7 @@ import { PerfilComponent } from './components/perfil/perfil.component';
 import { EventoService } from './services/evento.service';
 import { EventosComponent } from './components/eventos/eventos.component';
 import { TituloComponent } from './shared/titulo/titulo.component';
+import { NavComponent } from './shared/nav/nav.component';
 
 @NgModule({
   declarations: [
