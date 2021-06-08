@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormControl, FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-evento-detalhe',
@@ -7,9 +8,25 @@ import { Component, OnInit } from '@angular/core';
 })
 export class EventoDetalheComponent implements OnInit {
 
-  constructor() { }
+  form: FormGroup;
+
+  constructor() {
+    this.form = new FormGroup({});
+   }
 
   ngOnInit(): void {
+  }
+
+  public validation(): void {
+    this.form = new FormGroup({
+      local: new FormControl(),
+      dataEvento: new FormControl(),
+      tema: new FormControl(),
+      qtdPessoas: new FormControl(),
+      imagemURL: new FormControl(),
+      telefone: new FormControl(),
+      email: new FormControl(),
+    });
   }
 
 }
