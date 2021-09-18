@@ -16,6 +16,7 @@ export class EventoDetalheComponent implements OnInit {
 
   evento = {} as Evento;
   form: FormGroup;
+  estadoSalvar = 'post';
 
   get f(): any {
     return this.form.controls;
@@ -45,6 +46,9 @@ export class EventoDetalheComponent implements OnInit {
 
      if (eventoIdParam != null){
        this.spinner.show();
+
+       this.estadoSalvar = 'put';
+
        this.eventoService.getEventoById(+eventoIdParam).subscribe(
          (evento: Evento) => {
            this.evento = {...evento};
@@ -83,6 +87,36 @@ export class EventoDetalheComponent implements OnInit {
 
   public cssValidator(campoForm: FormControl): any {
     return {'is-invalid': campoForm?.errors && campoForm?.touched};
+  }
+
+  public salvarAlteracao(): void {
+    this.spinner.show();
+    if (this.form.valid) {
+
+      if (this.estadoSalvar === 'post'){
+        this.evento = { ... this.form.value };
+        this.eventoService.post(this.evento).subscribe(
+          () => this.toastr.success('Evento salvo com Sucesso!', 'Sucesso'),
+          (error: any) => {
+            console.error(error);
+            this.spinner.hide();
+            this.toastr.error('Erro ao salvar evento', 'Erro');
+          },
+          () => this.spinner.hide()
+        );
+      } else {
+        this.evento = {id: this.evento.id, ... this.form.value };
+        this.eventoService.put(this.evento).subscribe(
+          () => this.toastr.success('Evento salvo com Sucesso!', 'Sucesso'),
+          (error: any) => {
+            console.error(error);
+            this.spinner.hide();
+            this.toastr.error('Erro ao salvar evento', 'Erro');
+          },
+          () => this.spinner.hide()
+        );
+      }
+    }
   }
 
 }
